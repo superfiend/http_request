@@ -39,4 +39,24 @@ class HttpRequest {
             return json.decode(res);
         });
     }
+
+    static Future<bool> download(String url, String savePath,
+        {Map<String, dynamic> headers, Map<String, dynamic> queryParameters}) async {
+        final options = BaseOptions(headers: headers);
+        return Dio(options).download(url, savePath, queryParameters: queryParameters).then((_) {
+            return true;
+        }).catchError((error) {
+            print('发生错误, error: $error');
+            return false;
+        });
+    }
+
+    /// 下载到手机设备
+    static Future<bool> downloadToMobile(String url, String savePath,
+        {Map<String, dynamic> headers, Map<String, dynamic> queryParameters}) async {
+        return download(url,
+            '/storage/emulated/0${savePath.startsWith('/') ? savePath : '/$savePath'}',
+            headers: headers,
+            queryParameters: queryParameters);
+    }
 }
