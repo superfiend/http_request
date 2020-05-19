@@ -11,6 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  gbk2utf8: ^1.0.1 # 将gbk编码的网页内容转化为utf-8编码, 需要配合http
+  http: ^0.12.1
+  dio: ^3.0.9
+  html: ^0.14.0+3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
